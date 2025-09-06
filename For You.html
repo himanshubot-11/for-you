@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emoji Love Generator</title>
+<style>
+  body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(135deg, #ffe6f0, #ffccf2);
+    color: #660033;
+    text-align: center;
+    padding: 30px;
+  }
+
+  h1 {
+    font-size: 3em;
+    color: #ff3366;
+    text-shadow: 2px 2px 5px #ff99cc;
+    margin-bottom: 20px;
+  }
+
+  select, button {
+    font-size: 18px;
+    padding: 12px 20px;
+    margin: 10px;
+    border-radius: 12px;
+    border: 2px solid #ff66aa;
+    background-color: #ffccf2;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px #ff99cc;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  select:hover, button:hover {
+    transform: scale(1.05);
+    box-shadow: 4px 4px 15px #ff6699;
+  }
+</style>
+</head>
+<body>
+
+<h1>💞 Emoji Love Generator 💞</h1>
+<p>Select an option and click Generate (it will download a file):</p>
+
+<select id="choice">
+  <option value="sorry">Sorry</option>
+  <option value="love">Love</option>
+  <option value="kiss">Kiss</option>
+</select>
+<button onclick="generateFile()">Generate & Download</button>
+
+<script>
+const heartEmojis = ['❤️','💛','💚','💙','💜','🖤','🤍','💖','💗','💓','💞','💕','💘','💝','💟','❣️','💌','💔','💠','💫','✨','💥','💦','💨'];
+const kissEmojis = ['💋','👩‍❤️‍💋‍👨','👨‍❤️‍💋‍👨','👩‍❤️‍💋‍👩','😘','😗','😚','😙','💏'];
+
+function getRandomItem(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function generateFile() {
+  const choice = document.getElementById('choice').value;
+  let text = '';
+  
+  for (let i = 0; i < 1000; i++) {
+    if (choice === 'sorry') {
+      text += `Sorry ${getRandomItem(heartEmojis)}\n`;
+    } else if (choice === 'love') {
+      text += `I love you ${getRandomItem(heartEmojis)} ${getRandomItem(kissEmojis)}\n`;
+    } else if (choice === 'kiss') {
+      text += `${getRandomItem(kissEmojis)}\n`;
+    }
+  }
+
+  // Create downloadable file
+  const blob = new Blob([text], { type: "text/plain" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `${choice}_emojis.txt`;
+  link.click();
+}
+</script>
+
+</body>
+</html>
