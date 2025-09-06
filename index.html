@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emoji Generator</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+  }
+  select, button {
+    font-size: 18px;
+    padding: 10px;
+    margin: 10px;
+  }
+  #output {
+    margin-top: 20px;
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    word-wrap: break-word;
+  }
+</style>
+</head>
+<body>
+
+<h1>Emoji Text Generator</h1>
+<p>Select an option and click Generate:</p>
+
+<select id="choice">
+  <option value="sorry">Sorry</option>
+  <option value="love">Love</option>
+  <option value="kiss">Kiss</option>
+</select>
+<button onclick="generateEmojis()">Generate</button>
+
+<div id="output"></div>
+
+<script>
+const heartEmojis = ['❤️','💛','💚','💙','💜','🖤','🤍','💖','💗','💓','💞','💕','💘','💝','💟','❣️','💌','💔','💠','💤','💢','💫','✨','💥','💦','💨'];
+const kissEmojis = ['💋','👩‍❤️‍💋‍👨','👨‍❤️‍💋‍👨','👩‍❤️‍💋‍👩','😘','😗','😚','😙','💏'];
+
+function getRandomItem(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function generateEmojis() {
+  const choice = document.getElementById('choice').value;
+  const output = document.getElementById('output');
+  output.innerHTML = '';
+  let html = '';
+  
+  for (let i = 0; i < 1000; i++) {
+    if (choice === 'sorry') {
+      html += `Sorry ${getRandomItem(heartEmojis)} `;
+    } else if (choice === 'love') {
+      html += `I love you ${getRandomItem(heartEmojis)} ${getRandomItem(kissEmojis)} `;
+    } else if (choice === 'kiss') {
+      html += `${getRandomItem(kissEmojis)} `;
+    }
+  }
+  output.innerHTML = html;
+}
+</script>
+
+</body>
+</html>
